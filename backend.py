@@ -30,5 +30,18 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def get_word():
     return json_object
 
+@app.route('/genword', methods=['GET'])
+def get_genword():
+    with conn.cursor() as cur:
+        cur.execute("SELECT * FROM (SELECT * FROM wordStr ORDER BY DBMS_RANDOM.RANDOM)WHERE rownum<2")
+        res = cur.fetchall()
+        print(res)
+
+    dictionary = {
+        "answer": res[0][1].upper(),
+    }
+    json_object = json.dumps(dictionary,indent=4)
+    return json_object
+
 if __name__ == '__main__':
     app.run(debug=True)
