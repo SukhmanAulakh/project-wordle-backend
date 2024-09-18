@@ -1,8 +1,7 @@
-import requests
 import oracledb
 import json
 from flask import Flask
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 #Oracledb.connect information REDACTED from git
 conn = oracledb.connect(user="system",password="oracle",dsn="192.168.56.101:1521/free")
